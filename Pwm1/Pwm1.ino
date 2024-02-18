@@ -54,19 +54,19 @@ void OnPwmSequenceEnd()
 						       // channel 0
 	
 	for(uint32_t i = 0; i < kNumPwmValues; i++)
-	    cp[i] = samplecache.get_sample(g_status.counter_signal * kNumPwmValues + i, g_settings.volume);
+	    cp[i] = samplecache.get_sample(g_status.counter_signal + i, g_settings.volume);
     } else {
 	//play silence
 	PwmTactor.SilenceChannel(0, g_settings.volume);
     }
 
     //where are we in the square wave
-    g_status.counter_square++;
-    while(g_status.counter_square > g_settings.samples_square)
+    g_status.counter_square += kNumPwmValues;
+    while(g_status.counter_square  > g_settings.samples_square)
 	g_status.counter_square -= g_settings.samples_square;
     
     //where are we in the sine wave
-    g_status.counter_signal++;
+    g_status.counter_signal += kNumPwmValues;
     while(g_status.counter_signal > g_settings.samples_signal)
 	g_status.counter_signal -= g_settings.samples_signal;
     

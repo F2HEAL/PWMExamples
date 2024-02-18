@@ -54,7 +54,7 @@ void OnPwmSequenceEnd()
 	// provide the kNumPwmValues (8) samples for this channel
 	// get_sample returns a uint16_t with values between 0 and 2 * volume
 	for(uint32_t i = 0; i < kNumPwmValues; i++)
-	    cp[i] = samplecache.get_sample(g_status.counter_signal + i, g_settings.volume);
+	    cp[i*kChannelsPerPwmModule] = samplecache.get_sample(g_status.counter_signal + i, g_settings.volume);
     } else {
 	//square is inactive, play silence for this channel.
 	// as get_sample returns a uint16_t with values between 0 and

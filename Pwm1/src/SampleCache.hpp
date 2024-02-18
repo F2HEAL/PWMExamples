@@ -26,24 +26,17 @@ public:
     
     SampleCache() {}
 
-    void InitSampleCache(
-	uint32_t stimfreq) 
-	
-
-	{
-
-	    // +7 samples of slack in the table to handle worst case call
-	    // where the table is queried on the last sample of a
-	    // stimcycle (and still needs to provide 8 samples)	
-	    samples_needed_ = Settings::samplerate / stimfreq + 7;
-	    init_cache_(Settings::samplerate, stimfreq);
-	}
-    
+    void InitSampleCache(uint32_t stimfreq){
+	// +7 samples of slack in the table to handle worst case call
+	// where the table is queried on the last sample of a
+	// stimcycle (and still needs to provide 8 samples)	
+	samples_needed_ = Settings::samplerate / stimfreq + 7;
+	init_cache_(Settings::samplerate, stimfreq);
+    }
 
     uint16_t get_sample(uint16_t i, uint16_t volume) const {
 	return (uint16_t) (volume + volume * cache_[i]);
     }
-    
     
 private:
     unsigned samples_needed_;    

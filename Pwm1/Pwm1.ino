@@ -12,7 +12,6 @@ SampleCache samplecache;
 struct Status {
     uint32_t counter_square = 0;  // signal samples have been played
     uint32_t counter_signal = 0;  // square samples have been played 
-    uint32_t volume = 0;
 }g_status;
 
 

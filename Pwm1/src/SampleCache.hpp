@@ -39,8 +39,12 @@ public:
     }
     
 private:
-    unsigned samples_needed_;    
-    std::array<float, Settings::samplerate> cache_;
+    unsigned samples_needed_;
+
+    // staticly allocate an array for caching the sample values
+    // we divide by 5 because to fit in the nRF52832 memory, meaning
+    // we can only generate signals from 5Hz and up
+    std::array<float, Settings::samplerate / 5> cache_;
     
     constexpr static float pi() { return std::atan(1)*4; }
     

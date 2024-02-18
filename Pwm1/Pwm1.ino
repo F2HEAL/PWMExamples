@@ -25,6 +25,11 @@ void setup()
 
 void update_frequencies(uint32_t freq_square, uint32_t freq_signal) 
 {
+    //signal freq must be at least 5Hz, see SampleCache.hpp L47 for
+    //details
+    if(freq_signal < 5) freq_signal = 5;
+    
+    
     g_settings.freq_square = freq_square;
     g_settings.samples_square = g_settings.samplerate / freq_square;
     
